@@ -1,0 +1,14 @@
+name: assignment-2
+
+services:
+  diagnostic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: diagnostic-tool:latest
+    container_name: diagnostic-cli
+    healthcheck:
+      test: ["CMD-SHELL", "/app/health-check.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
