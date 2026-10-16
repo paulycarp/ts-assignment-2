@@ -8,8 +8,8 @@ WORKDIR /app
 # Copy application files into the image
 COPY app/ /app/
 
-# Set executable permissions for application scripts
-RUN chmod +x /app/*.sh
+# Normalize line endings (CRLF -> LF) and set executable permissions
+RUN sed -i 's/\r$//' /app/*.sh && chmod +x /app/*.sh
 
 # Configure ENTRYPOINT and CMD
 ENTRYPOINT ["/app/diagnostic.sh"]
